@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from collections import Counter
 
 def is_emoji(char: str) -> bool:
     
@@ -36,4 +37,33 @@ def load_contractions() -> dict[str, str]:
         contraction.lower(): expansion
         for contraction, expansion in contractions.items()
     }
+
+def load_slang()-> dict[str,str]:
+    resource = Path(__file__).resolve().parents[3] / "data" / "SlangText2.csv"
+    
+    slang_dataset=dict()
+   
+    with resource.open(encoding="utf-8") as f:
+        for word in f:
+            slang_dataset[word.split(",")[0].replace("\n","")]=" ".join(word.split(",")[1:]).replace("\n","")
+                
+    return slang_dataset
+
+
+from pathlib import Path
+
+def word_freq_loader() -> dict[str, int]:
+    resource = Path(__file__).resolve().parents[3] / "data" / "unigram_freq.csv"
+    
+    word_freq_dataset = dict()
+   
+    with resource.open(encoding="utf-8") as f:
+        next(f) 
+        for word in f:
+            parts = word.strip().split(",")
+            if len(parts) == 2:
+                word_freq_dataset[parts[0]] = int(parts[1])
+                
+    return word_freq_dataset
+
 
