@@ -1,4 +1,5 @@
-from utils import load_wordnet,singularize,load_slang
+from utils import load_wordnet,singularize,load_slang,word_freq_loader
+from .Spelling import CorrectSpelling
 import unicodedata
 import re
 
@@ -73,5 +74,8 @@ def normalize_slang(text, table=None):
 
     
 def correct_spelling(text):
-    pass
+    freq=word_freq_loader()
+    correct=CorrectSpelling()
+    ans=correct(text,freq)
+    return ans
 
