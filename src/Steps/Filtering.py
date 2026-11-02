@@ -1,6 +1,6 @@
 from utils import *
 
-def remove_stopwords(text, custom_words=None, extra_only=False):
+def remove_stopwords(text):
     stopwords=load_stopwords()
     ans=[]
     for word in text.split():
