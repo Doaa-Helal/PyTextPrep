@@ -39,7 +39,7 @@ def load_contractions() -> dict[str, str]:
     }
 
 def load_slang()-> dict[str,str]:
-    resource = Path(__file__).resolve().parents[3] / "data" / "SlangText2.csv"
+    resource = Path(__file__).resolve().parents[2] / "Resources" / "SlangText2.csv"
     
     slang_dataset=dict()
    
@@ -50,10 +50,9 @@ def load_slang()-> dict[str,str]:
     return slang_dataset
 
 
-from pathlib import Path
 
 def word_freq_loader() -> dict[str, int]:
-    resource = Path(__file__).resolve().parents[3] / "data" / "unigram_freq.csv"
+    resource = Path(__file__).resolve().parents[2] / "Resources" / "unigram_freq.csv"
     
     word_freq_dataset = dict()
    
