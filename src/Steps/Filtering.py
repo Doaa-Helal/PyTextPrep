@@ -1,9 +1,9 @@
 from .utils import *
 from ..registry import register_step
 
+@requires_str
 @register_step("remove_stopwords")
 def remove_stopwords(text):
-    validate_string(text)
     stopwords=load_stopwords()
     ans=[]
     for word in text.split():
@@ -13,9 +13,9 @@ def remove_stopwords(text):
             ans.append(word)
     return " ".join(ans)
 
+@requires_str
 @register_step("expand_contractions")
 def expand_contractions(text):
-    validate_string(text)
     contractions_dict=load_contractions()
     ans=[]
     for word in text.split():

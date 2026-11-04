@@ -1,15 +1,15 @@
 from ..registry import register_step
-from utils import *
+from .utils import *
 import re
 
+@requires_str
 @register_step("word_tokenize")
 def word_tokenize(text):
-    validate_string(text)
     return text.split()
 
+@requires_str
 @register_step("sent_tokenize")
 def sent_tokenize(text: str) -> list[str]:
-    validate_string(text)
     if not text:
         return []
 
