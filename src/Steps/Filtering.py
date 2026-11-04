@@ -1,5 +1,7 @@
-from utils import *
+from .utils import *
+from ..registry import register_step
 
+@register_step("remove_stopwords")
 def remove_stopwords(text):
     stopwords=load_stopwords()
     ans=[]
@@ -10,7 +12,7 @@ def remove_stopwords(text):
             ans.append(word)
     return " ".join(ans)
 
-
+@register_step("expand_contractions")
 def expand_contractions(text):
     contractions_dict=load_contractions()
     ans=[]
