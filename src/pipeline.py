@@ -4,7 +4,7 @@ from inspect import signature
 from difflib import get_close_matches
 from .registry import STEP_REGISTRY, get_step
 from .Steps import *
-
+from .exceptions import *
 
 
 class Pipeline:
@@ -40,7 +40,7 @@ class Pipeline:
             message = f"Unknown step: '{step_name}'."
             if suggestions:
                 message += f" Did you mean: {', '.join(suggestions)}?"
-            raise ValueError(message)
+            raise UnknownStepError(message)
 
     @staticmethod
     def _validate_params(step_name: str,params: dict[str, Any]) -> None:
@@ -58,7 +58,7 @@ class Pipeline:
             sig.bind("sample text", **params)
 
         except TypeError as error:
-            raise ValueError(f"Invalid parameters for step '{step_name}': {error}") from error
+            raise InvalidStepParamsError(f"Invalid parameters for step '{step_name}': {error}") from error
 
     @property
     def steps(self) -> list[str]:
@@ -109,3 +109,14 @@ class Pipeline:
         return f"Pipeline({step_names})"
 
 
+pipeline = Pipeline([
+    ("lowercase", {}),
+    ("remove_emails", {"replace_with":""}),
+    ("remove_punctuation", {}),
+])
+
+text = "HELLO! Visit doohelal@gmail.com"
+
+result = pipeline.transform(text)
+
+print(result)
