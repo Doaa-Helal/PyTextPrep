@@ -1,10 +1,20 @@
 import json
 from pathlib import Path
 from collections import Counter
+from functools import wraps
 
-def validate_string(txt):
-    if not isinstance(txt,str):
-        raise TypeError(f"Expected str got {type(str).__name__}")
+
+def requires_str(func):
+
+    @wraps(func)
+    def wrapper(text, *args, **kwargs):
+
+        if not isinstance(text, str):
+            raise TypeError(f"Expected str, got {type(text).__name__}")
+
+        return func(text, *args, **kwargs)
+
+    return wrapper
 
 def is_emoji(char: str) -> bool:
     
