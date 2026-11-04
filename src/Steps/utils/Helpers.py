@@ -2,6 +2,10 @@ import json
 from pathlib import Path
 from collections import Counter
 
+def validate_string(txt):
+    if not isinstance(txt,str):
+        raise TypeError(f"Expected str got {type(str).__name__}")
+
 def is_emoji(char: str) -> bool:
     
     code = ord(char)

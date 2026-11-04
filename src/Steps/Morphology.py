@@ -1,4 +1,4 @@
-from .utils import load_wordnet,singularize,load_slang,word_freq_loader
+from .utils import *
 from ..registry import register_step
 from .Spelling import CorrectSpelling
 import unicodedata
@@ -6,6 +6,7 @@ import re
 
 @register_step("lemmatize")
 def lemmatize(text):
+    validate_string(text)
     if not text:
         raise ValueError("text must have a value")
     elif not isinstance(text,str):
@@ -26,7 +27,7 @@ def lemmatize(text):
 
 @register_step("normalize_arabic")
 def normalize_arabic(text: str, taa_marbuta: bool = False) -> str:
-    
+    validate_string(text)
     text = re.sub(r'[\u064B-\u0652\u0670\u0640]', '', text)
     text = re.sub(r'[\u0622\u0623\u0625\u0671]', '\u0627', text)
     text = text.replace('\u0649', '\u064A')
@@ -37,6 +38,7 @@ def normalize_arabic(text: str, taa_marbuta: bool = False) -> str:
 
 @register_step("remove_accents")
 def remove_accents(text):
+    validate_string(text)
     normalized = unicodedata.normalize("NFKD", text)
     clean_text = normalized.encode("ascii", "ignore").decode("ascii")
     return clean_text
@@ -64,6 +66,7 @@ def char_ngrams(word, n):
 
 @register_step("normalize_slang")
 def normalize_slang(text, table=None):
+    validate_string(text)
     slang_dict=None
     if table:
         slang_dict=table
@@ -79,6 +82,7 @@ def normalize_slang(text, table=None):
 
 @register_step("correct_spelling")  
 def correct_spelling(text):
+    validate_string(text)
     freq=word_freq_loader()
     correct=CorrectSpelling()
     ans=correct(text,freq)

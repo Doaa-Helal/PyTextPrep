@@ -6,27 +6,32 @@ from ..registry import register_step
 
 @register_step("lowercase")
 def lowercase(txt:str):
+    validate_string(txt)
     return txt.lower()
 
 @register_step("normalize_whitespace")
 def normalize_whitespace(txt:str):
+    validate_string(txt)
     cleaned = re.sub(r'\s+', ' ', txt)
     return cleaned
 
 @register_step("remove_urls")
 def remove_urls(txt:str,replace_with:str):
+    validate_string(txt)
     urls_pattern=r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
     cleaned=re.sub(urls_pattern,replace_with,txt)
     return cleaned
 
 @register_step("remove_emails")
 def remove_emails(txt,replace_with):
+    validate_string(txt)
     email_pattern=r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"
     cleaned=re.sub(email_pattern,replace_with,txt)
     return cleaned
 
 @register_step("remove_punctuation")
 def remove_punctuation(txt:str, keep_emojis=True):
+    validate_string(txt)
     txt=txt.replace("'","")
     
     if not keep_emojis:
@@ -38,47 +43,52 @@ def remove_punctuation(txt:str, keep_emojis=True):
 
 @register_step("normalize_repeating_chars")
 def normalize_repeating_chars(txt, keep=2):
+    validate_string(txt)
     pattern = r'(.)\1{2,}'
     repl = r'\1' * keep
     return re.sub(pattern, repl, txt)
 
 @register_step("remove_html")
 def remove_html(txt):
+    validate_string(txt)
     txt=strip_tags(txt)
     return txt
 
 @register_step("remove_mentions")
 def remove_mentions(txt):
+    validate_string(txt)
     pattern=r"(?<![\w@])@[A-Za-z0-9_]+"
     return re.sub(pattern,"",txt)
 
 @register_step("remove_hashtags")
-def remove_hashtags(text, keep_word=False):
+def remove_hashtags(txt, keep_word=False):
+    validate_string(txt)
     if keep_word:
         pattern=r"#(?=[A-Za-z0-9_]+)"
     else:    
         pattern=r"(?<!\w)#[A-Za-z0-9_]+"
-    return re.sub(pattern,"",text)
+    return re.sub(pattern,"",txt)
 
 @register_step("remove_digits")
 def remove_digits(txt):
+    validate_string(txt)
     pattern=r"[+-]?\d+(?:\.\d+)?"
     return re.sub(pattern,"",txt)
 
 
 
 @register_step("handle_emojis")
-def handle_emojis(text: str, mode: str = "remove") -> str:
-   
+def handle_emojis(txt: str, mode: str = "remove") -> str:
+    validate_string(txt)
     if mode not in ("remove", "text"):
         raise ValueError("mode must be either 'remove' or 'text'")
 
-    if not text:
+    if not txt:
         return ""
 
     result = []
 
-    for char in text:
+    for char in txt:
         if char in ("\ufe0f", "\u200d"):
             continue
 
