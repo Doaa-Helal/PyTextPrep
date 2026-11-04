@@ -1,8 +1,11 @@
+from ..registry import register_step
 import re
 
+@register_step("word_tokenize")
 def word_tokenize(text):
     return text.split()
 
+@register_step("sent_tokenize")
 def sent_tokenize(text: str) -> list[str]:
  
     if not text:
