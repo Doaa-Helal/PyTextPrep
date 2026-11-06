@@ -1,6 +1,6 @@
 import re
 
-URLS_pattern=re.compile(r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)")
+URLS_pattern=re.compile(r"""(?i)\b(?:(?:https?|ftp)://|www\.)[^\s<>"']+""")
 EMAIL_pattern=re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
 MENTION_pattern=re.compile(r"(?<![\w@])@[A-Za-z0-9_]+")
 DIGIT_pattern=re.compile(r"[+-]?\d+(?:\.\d+)?")
