@@ -42,7 +42,7 @@ def sent_tokenize(text: str) -> list[str]:
     if not text:
         return []
 
-    abbreviations = ["Dr.","Mr.","Mrs.","e.g.","i.e.","etc."]
+    abbreviations = ["Dr.","Mr.","Mrs.","e.g.","i.e."]
     placeholder = "\u0000"
     for abbreviation in abbreviations:
         protected = abbreviation.replace(".", placeholder)
