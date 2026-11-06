@@ -79,8 +79,18 @@ class Pipeline:
             params = step["params"]
             result = func(result, **params)
 
-            if not isinstance(result, str):
-                raise TypeError( f"Step '{step['name']}' must return str, " f"got {type(result).__name__}")
+            if step["name"] == "porter_stemmer":
+                if not isinstance(result, list):
+                    raise TypeError(
+                        f"Step '{step['name']}' must return list, "
+                        f"got {type(result).__name__}"
+                    )
+
+            else:
+                if not isinstance(result, str):
+                    raise TypeError(
+                        f"Step '{step['name']}' must return str, "
+                        f"got {type(result).__name__}")
 
         if return_tokens:
             tokenizer = STEP_REGISTRY.get("word_tokenize")
@@ -113,6 +123,7 @@ pipeline = Pipeline([
     ("lowercase", {}),
     ("remove_emails", {"replace_with":""}),
     ("remove_punctuation", {}),
+    ("porter_stemmer",{})
 ])
 
 text = "HELLO! Visit doohelal@gmail.com"
