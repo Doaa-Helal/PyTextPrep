@@ -48,7 +48,7 @@ def normalize_whitespace(txt:str)->str:
         'Doaa Helal'
     """  
     cleaned = WHITESPACE_pattern.sub(" ",txt).strip()
-    return normalize_whitespace(cleaned)
+    return cleaned
 
 @register_step("remove_urls")
 @requires_str
@@ -168,7 +168,7 @@ def normalize_repeating_chars(txt:str, keep=2)->str:
         >>> normalize_repeating_chars("Soooo cool", keep=1)
         'So cool'
     """     
-    if isinstance(keep,int) and keep>=0 and not keep==False:
+    if isinstance(keep,int) and keep>=0 :
         repl = r'\1' * keep
         return REPEATING_pattern.sub( repl, txt)
     else:
