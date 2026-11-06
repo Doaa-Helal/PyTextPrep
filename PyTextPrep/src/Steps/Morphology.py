@@ -46,7 +46,6 @@ def lemmatize(text:str)->str:
     for word in words:
         if word in wordnet:
             ans.append(wordnet[word])
-            print(wordnet[word])
         else:
             word=singularize(word)
             ans.append(word)
@@ -119,7 +118,7 @@ def remove_accents(text:str)->str:
 
 @register_step("ngrams")
 @requires_str
-def ngrams(tokens:list, n:int)-> list[tuple]:
+def ngrams(tokens:str, n:int)-> list[tuple]:
     """
     Generate n-grams from a sequence of tokens.
 
@@ -141,8 +140,9 @@ def ngrams(tokens:list, n:int)-> list[tuple]:
         [('I', 'love'), ('natural', 'language'), ('processing',)]
     """
     step = n - 1
+    tokens=tokens.split()
     ans=[]
-    for i in range(0,len(tokens),step):
+    for i in range(0,len(tokens)):
         gram=tokens[i:i+n]
         if len(gram)==n:
             ans.append(tuple(gram))
@@ -176,7 +176,6 @@ def char_ngrams(word:str, n:int)->list[str]:
     ans=[]
     for i in range(0,len(word)-n+1):
         gram=word[i:i+n]
-        print(gram)
         if len(gram)==n:
             ans.append(gram)
     return ans

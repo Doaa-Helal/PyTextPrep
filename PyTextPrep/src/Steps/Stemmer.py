@@ -295,6 +295,8 @@ class PorterStemmer:
         Words containing two or fewer characters are returned unchanged
         after case normalization.
         """
+        if not isinstance(word,str):
+            raise TypeError(f"expected str got {type(word).__name__}")
         word = word.casefold()
         if len(word) <= 2:
             return word
