@@ -25,8 +25,8 @@ def remove_stopwords(text:str)-> str:
     NEGATIONS = {"not", "no", "nor"}
     ans=[]
     for word in text.split():
-        word=word.casefold()
-        if word.casefold() in stopwords and word not in NEGATIONS:
+        x=word.casefold()
+        if x in stopwords and word not in NEGATIONS:
             continue
         else:
             ans.append(word)
