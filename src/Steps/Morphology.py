@@ -10,7 +10,10 @@ stemmer=PorterStemmer()
 @register_step("porter_stemmer")
 @requires_str
 def porter_stemmer(text:str):
-    return stemmer.stem(text)
+    ans=[]
+    for word in text.split():
+        ans.append(stemmer.stem(word))
+    return ans
 
 
 @register_step("lemmatize")
