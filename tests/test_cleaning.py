@@ -71,6 +71,10 @@ class TestRemoveURLs(unittest.TestCase):
         )
         self.assertIn("[URL]", result)
 
+    def test_trailing_punctuation(self):
+        result=cleaning.remove_urls("go to https://a.io/x?y=1.")
+        self.assertEqual(result,"go to ." )
+
     def test_empty_text(self):
         self.assertEqual(cleaning.remove_urls(""), "")
 
@@ -82,6 +86,9 @@ class TestRemoveURLs(unittest.TestCase):
         with self.assertRaises(TypeError):
             cleaning.remove_urls(123)
 
+    def test_broken_urls(self):
+        result=cleaning.remove_urls("not a url: http:/broken")
+        self.assertEqual(result,"not a url: http:/broken" )
 
 class TestRemoveEmails(unittest.TestCase):
 
@@ -114,6 +121,10 @@ class TestRemoveEmails(unittest.TestCase):
         with self.assertRaises(TypeError):
             cleaning.remove_emails(None)
 
+    def test_custom_email(self):
+        result=cleaning.remove_emails("write to ali@iti.gov.eg today")
+        self.assertEqual(result,"write to  today")
+
 
 class TestRemovePunctuation(unittest.TestCase):
 
@@ -122,8 +133,8 @@ class TestRemovePunctuation(unittest.TestCase):
         self.assertEqual(result, "Hello  world ")
 
     def test_remove_apostrophes(self):
-        result = cleaning.remove_punctuation("don't stop")
-        self.assertEqual(result, "dont stop")
+        result = cleaning.remove_punctuation("rock'n'roll!!")
+        self.assertEqual(result, "rocknroll  ")
 
     def test_keep_emojis(self):
         result = cleaning.remove_punctuation("Hello 😀!")
@@ -161,8 +172,8 @@ class TestNormalizeRepeatingChars(unittest.TestCase):
         self.assertEqual(result, "sooo")
 
     def test_preserve_double_characters(self):
-        result = cleaning.normalize_repeating_chars("hello")
-        self.assertEqual(result, "hello")
+        result = cleaning.normalize_repeating_chars("good book")
+        self.assertEqual(result, "good book")
 
     def test_keep_zero(self):
         result = cleaning.normalize_repeating_chars("soooo", keep=0)
