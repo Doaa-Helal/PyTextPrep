@@ -1,8 +1,16 @@
 from .utils import *
 from ..registry import register_step
+from .Stemmer import PorterStemmer
 from .Spelling import CorrectSpelling
 import unicodedata
 import re
+
+stemmer=PorterStemmer()
+
+@register_step("porter_stemmer")
+@requires_str
+def porter_stemmer(text:str):
+    return stemmer.stem(text)
 
 
 @register_step("lemmatize")
