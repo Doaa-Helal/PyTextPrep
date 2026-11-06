@@ -118,16 +118,3 @@ class Pipeline:
         step_names = " -> ".join(self.steps)
         return f"Pipeline({step_names})"
 
-
-pipeline = Pipeline([
-    ("lowercase", {}),
-    ("remove_emails", {"replace_with":""}),
-    ("remove_punctuation", {}),
-    ("porter_stemmer",{})
-])
-
-text = "HELLO! Visit doohelal@gmail.com"
-
-result = pipeline.transform(text)
-
-print(result)
