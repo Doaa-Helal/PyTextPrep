@@ -4,7 +4,7 @@ from ..registry import register_step
 
 @register_step("remove_stopwords")
 @requires_str
-def remove_stopwords(text:str)-> str:
+def remove_stopwords(text:str,language="en")-> str:
     """
     Remove stopwords from the input text.
 
@@ -21,7 +21,7 @@ def remove_stopwords(text:str)-> str:
         >>> remove_stopwords("This is a simple example")
         'simple example'
     """
-    stopwords=load_stopwords()
+    stopwords=load_stopwords(language)
     NEGATIONS = {"not", "no", "nor"}
     ans=[]
     for word in text.split():
