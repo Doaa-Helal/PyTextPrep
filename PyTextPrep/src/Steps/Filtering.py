@@ -22,7 +22,15 @@ def remove_stopwords(text:str,language="en")-> str:
         'simple example'
     """
     stopwords=load_stopwords(language)
-    NEGATIONS = {"not", "no", "nor"}
+    EN_NEGATIONS = {"not", "no", "nor"}
+    AR_NEGATION = ["لا", "لم", "لن", "لما", "لات","ليس", "ليست", "ليسا", "ليستا", "ليسوا","لسن", "لست", "لستم", "لستما", "لستن", "لسنا","ما", "غير", "عدم", "بلا", "بدون", "دون","كلا", "كلّا","أبدا", "ابدا", "أبداً", "ابداً","قط","مطلقا", "مطلقاً","إطلاقا", "اطلاقا", "إطلاقاً","البتة"]
+    AR_NEGATION_SET = frozenset(AR_NEGATION)
+    EN_NEGATION_SET=frozenset(EN_NEGATIONS)
+    
+    if language=="ar":
+        NEGATIONS=AR_NEGATION_SET
+    else:
+        NEGATIONS=EN_NEGATION_SET
     ans=[]
     for word in text.split():
         x=word.casefold()
