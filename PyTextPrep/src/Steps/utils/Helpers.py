@@ -26,8 +26,11 @@ def is_emoji(char: str) -> bool:
     )
 
 
-def load_stopwords() -> set[str]:
-    resource = Path(__file__).resolve().parents[2] / "Resources" / "english_stopwords.txt"
+def load_stopwords(language) -> set[str]:
+    if language=="en":
+        resource = Path(__file__).resolve().parents[2] / "Resources" / "english_stopwords.txt"
+    else:
+        resource = Path(__file__).resolve().parents[2] / "Resources" / "arabic_stopwords.txt"
 
     with resource.open(encoding="utf-8") as file:
         return {
@@ -80,3 +83,14 @@ def word_freq_loader() -> dict[str, int]:
     return word_freq_dataset
 
 
+def load_ar_punctuation()->list[str]:
+    resource = Path(__file__).resolve().parents[2] / "Resources" / "arabic_punctuation.txt"
+        
+    ar_punctuation=[]
+    
+    with resource.open(encoding="utf-8") as f:
+        for word in f:
+            parts = word.strip()
+            ar_punctuation.append(parts)
+                
+    return ar_punctuation
