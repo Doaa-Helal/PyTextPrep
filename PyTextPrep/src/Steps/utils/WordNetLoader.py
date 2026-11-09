@@ -21,7 +21,7 @@ def singularize(word: str) -> str:
     return word
 
 def load_wordnet() -> set[str]:
-    resource = Path(__file__).resolve().parents[3] / "data" / "corpora" / "wordnet"
+    resource = Path(__file__).resolve().parents[2] / "Resources" / "wordnet"
 
     files = list(resource.glob("*.exc"))
     lemma_dataset=dict()
@@ -31,9 +31,3 @@ def load_wordnet() -> set[str]:
                 lemma_dataset[word.split()[0]]=word.split()[1]
                 
     return lemma_dataset
-
-
-
-
-
-
