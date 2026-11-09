@@ -8,7 +8,7 @@ filtering, tokenization, morphology, spelling, and n-gram steps.
 
 You can now download the package using: 
 ```shell
-pip install -i https://test.pypi.org/simple/ pytextprep-doaahelal==0.1.1
+pip install -i https://test.pypi.org/simple/ pytextprep-doaahelal==0.1.2
 ```
 
 ## Current project layout
