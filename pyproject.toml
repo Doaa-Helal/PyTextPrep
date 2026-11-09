@@ -1,0 +1,19 @@
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pytextprep-doaahelal"
+version = "0.1.1"
+description = "A lightweight Python library for text preprocessing"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["PyTextPrep*"]
+
+[tool.setuptools.package-data]
+"PyTextPrep" = ["resources/*.json", "resources/*.txt","resources/*.csv","resources/wordnet/*.exc"]
