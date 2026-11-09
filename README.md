@@ -4,6 +4,13 @@ PyTextPrep is a small, extensible Python library for preparing text before
 analysis or machine-learning workflows. It provides reusable cleaning,
 filtering, tokenization, morphology, spelling, and n-gram steps.
 
+## Ready to download package
+
+You can now download the package using: 
+```shell
+pip install -i https://test.pypi.org/simple/ pytextprep-doaahelal==0.1.1
+```
+
 ## Current project layout
 
 The source code is currently used directly from the repository:
