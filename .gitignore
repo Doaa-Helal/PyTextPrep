@@ -2,3 +2,5 @@ try.ipynb
 __pycache__
 data/*
 pytextprep_doaahelal.egg-info/*
+dist/pytextprep_doaahelal-0.1.0-py3-none-any.whl
+dist/pytextprep_doaahelal-0.1.0.tar.gz
